@@ -1,0 +1,30 @@
+{
+  "name": "lasync",
+  "version": "0.0.0",
+  "description": "tiny async library",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "tape test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joaquimserafim/lasync.git"
+  },
+  "keywords": [
+    "async",
+    "flow",
+    "callbacks"
+  ],
+  "author": "@joaquimserafim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joaquimserafim/lasync/issues"
+  },
+  "homepage": "https://github.com/joaquimserafim/lasync",
+  "devDependencies": {
+    "tape": "~2.3.2"
+  }
+}
