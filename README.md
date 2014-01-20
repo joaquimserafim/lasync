@@ -2,7 +2,9 @@
 
 An simple and tiny async library.
 
+<a href="https://nodei.co/npm/lasync/"><img src="https://nodei.co/npm/lasync.png"></a>
 
+[![Build Status](https://travis-ci.org/joaquimserafim/lasync.png?branch=master)](https://travis-ci.org/joaquimserafim/lasync)
 
 ##Usage
 
