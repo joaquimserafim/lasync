@@ -1,7 +1,7 @@
 {
   "name": "lasync",
   "version": "0.0.0",
-  "description": "tiny async library",
+  "description": "An simple and tiny async library",
   "main": "index.js",
   "directories": {
     "test": "test"
