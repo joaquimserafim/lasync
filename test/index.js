@@ -3,6 +3,7 @@ var test = require('tape');
 var lasync = require('../');
 
 function a (cb) {
+  console.log('run function "a"');
   if (!cb || typeof cb !== 'function') cb = function () {};
   setTimeout(function () {
     return cb(null);
@@ -10,6 +11,7 @@ function a (cb) {
 }
 
 function b (cb) {
+  console.log('run function "b"');
   if (!cb || typeof cb !== 'function') cb = function () {};
   setTimeout(function () {
     return cb(null, 'Hello World');
@@ -17,24 +19,64 @@ function b (cb) {
 }
 
 function c (cb) {
+  console.log('run function "c"');
   if (!cb) cb = function () {};
   return cb(null, 1);
 }
 
-test('lasync - series', function (t) {
-  t.plan(1);
+lasync.series([
+  function (cb) {
+    test('lasync - series', function (t) {
+      t.plan(1);
 
-  lasync.series([a, b, c], function (err, results) {
-    if (err) t.fail(err);
-    t.ok(results, '"' + results.join(', ') + '"');
-  });
-});
+      lasync.series([a, b, c], function (err, results) {
+        if (err) t.fail(err);
+        t.ok(results, '"' + results.join(', ') + '"');
+        cb();
+      });
 
-test('lasync - parallel', function (t) {
-  t.plan(1);
+    });
+  }, 
+  function (cb) {
+    test('lasync - parallel', function (t) {
+      t.plan(1);
 
-  lasync.parallel([a, b, c], function (err, results) {
-    if (err) t.fail(err);
-    t.ok(results, '"' + results.join(', ') + '"');
-  });
+      setTimeout(function () {
+        lasync.parallel([a, b, c], function (err, results) {
+          if (err) t.fail(err);
+          t.ok(results, '"' + results.join(', ') + '"');
+          cb();
+        });
+      }, 1500);
+
+    });
+  },
+  function (cb) {
+    test('lasync - series with error', function (t) {
+      t.plan(2);
+
+      setTimeout(function () {
+        lasync.series([
+          function (callback) {
+            return callback(null, 'ok');
+          },
+          function (callback) {
+            // flow will end here
+            return callback('this is a error!!!!');
+          },
+          function (callback) {
+            return callback(null, 'will not execute');
+          }
+        ], function (err, results) {
+          if (err) t.ok(err, err);
+
+          t.equal(results, undefined, 'will return "undefined"');
+          cb();
+        });
+      }, 1500);
+
+    });
+  }], 
+  function (err, results) {
+    //empty
 });
