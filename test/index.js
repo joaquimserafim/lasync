@@ -4,7 +4,6 @@ var lasync = require('../');
 
 function a (cb) {
   console.log('run function "a"');
-  if (!cb || typeof cb !== 'function') cb = function () {};
   setTimeout(function () {
     return cb(null);
   }, 3000);
@@ -12,7 +11,6 @@ function a (cb) {
 
 function b (cb) {
   console.log('run function "b"');
-  if (!cb || typeof cb !== 'function') cb = function () {};
   setTimeout(function () {
     return cb(null, 'Hello World');
   }, 2500);
@@ -20,8 +18,7 @@ function b (cb) {
 
 function c (cb) {
   console.log('run function "c"');
-  if (!cb) cb = function () {};
-  return cb(null, 1);
+  return cb(null, 123);
 }
 
 lasync.series([
