@@ -6,6 +6,8 @@ An simple and tiny async library for control flow.
 
 [![Build Status](https://travis-ci.org/joaquimserafim/lasync.png?branch=master)](https://travis-ci.org/joaquimserafim/lasync)
 
+[![browser support](https://ci.testling.com/joaquimserafim/lasync.png)](https://ci.testling.com/joaquimserafim/lasync)
+
 **V1.1**
 
 ####series
